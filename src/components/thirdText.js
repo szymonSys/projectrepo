@@ -7,7 +7,7 @@ const Div = styled.div`
   max-width: 35%;
   min-width: 500px;
   margin: 0 13% 0 auto;
-  z-index: 3;
+  z-index: 120;
   position: relative;
 `
 

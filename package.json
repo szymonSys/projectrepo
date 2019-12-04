@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "isle-of-malta",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Isle of Malta website",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Szymon Sysło <szymonsyslo@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "gatsby": "^2.18.4",

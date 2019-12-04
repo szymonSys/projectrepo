@@ -90,7 +90,8 @@ const FirstHeaderText = props => {
         width="263px"
         paddingTop="8px"
         marginBottom="60px"
-        zIndexAfter="3"
+        zIndex="1"
+        zIndexAfter="-1"
       >
         <Span topOffset="-12px">życia</Span>
       </SpanWrapper>

@@ -38,7 +38,6 @@ import palm_sticker from "../assets/stickers/palm-sticker.png"
 import umbrela_sticker from "../assets/stickers/umbrela-sticker.png"
 import glasses_image from "../assets/glasses.png"
 import fontRegular from "../font/bebas-font/BebasNeueRegular.otf"
-import fontThin from "../font/bebas-font/BebasNeuethin.otf"
 import fontLight from "../font/bebas-font/BebasNeueLight.otf"
 import fontBold from "../font/bebas-font/BebasNeueBold.otf"
 
@@ -58,6 +57,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Bebas Neue Bold";
     src: url(${fontBold});
   }
+
+  html {
+  scroll-behavior: smooth;
+}
 
   body {
     margin: 0;
@@ -86,10 +89,11 @@ class IndexPage extends Component {
 
   componentDidMount() {
     this.sectionsTopOffset = this._getSetionsTopOffset(".section")
-    window.addEventListener("scroll", this.handleScroll)
     this.setActiveSection()
-    console.log(fontRegular)
+    window.addEventListener("scroll", this.handleScroll)
   }
+
+  // componentDidUpdate() {}
 
   componentWillUnmount() {
     window.removeEventListener(this.handleScroll)
@@ -105,7 +109,21 @@ class IndexPage extends Component {
 
   setActiveSection = () => {
     const activeSection = this._getActiveSection()
-    if (activeSection) {
+
+    if (!this.state.activeSection.length) {
+      this.setState({ activeSection })
+      return
+    }
+
+    let isTheSame = true
+
+    if (activeSection.length !== this.state.activeSection.length) {
+      isTheSame = activeSection.every(
+        (elem, index) => elem === this.state.activeSection[index]
+      )
+    }
+
+    if (!isTheSame) {
       this.setState({ activeSection })
     }
   }
@@ -116,9 +134,10 @@ class IndexPage extends Component {
   }
 
   handleScroll = e => {
-    this.setActiveSection()
     this.handleParallax(0.1)
-    this.checkIfCanAnimate("section-3")
+    this.setActiveSection()
+    // this.checkIfCanAnimate("section-3")
+    console.log("handleScroll")
   }
 
   _getSetionsTopOffset(selector) {
@@ -133,7 +152,6 @@ class IndexPage extends Component {
     const canAnimate = this.state.activeSection.some(
       activeSection => activeSection === id
     )
-    console.log(canAnimate)
     return canAnimate
   }
 
@@ -150,13 +168,13 @@ class IndexPage extends Component {
     return false
   }
 
-  _handleTickScrolling = () => {
-    if (this.interval) {
-      clearTimeout(this.interval)
-      delete this.interval
-    }
-    this.interval = setTimeout(this.handleParallax, 50)
-  }
+  // _handleTickScrolling = () => {
+  //   if (this.interval) {
+  //     clearTimeout(this.interval)
+  //     delete this.interval
+  //   }
+  //   this.interval = setTimeout(this.handleParallax, 50)
+  // }
 
   render() {
     return (
@@ -247,8 +265,8 @@ class IndexPage extends Component {
               position={{ bottom: -80, left: 28 }}
               positionUnits={{ left: "%" }}
               checkIfCanAnimate={() => this.checkIfCanAnimate("section-3")}
-              Yoffset={this.state.offset * 0.2}
-              Xoffset={this.state.offset * 0.8}
+              Yoffset={this.state.offset * 0.1}
+              Xoffset={this.state.offset * 0.1}
             />
           </Section>
           <Section
@@ -258,9 +276,9 @@ class IndexPage extends Component {
           >
             <RocketPig
               checkIfCanAnimate={() => this.checkIfCanAnimate("section-4")}
-              Yoffset={-this.state.offset * 0.8}
-              Xoffset={-this.state.offset * 1.8}
-              rotate={this.state.offset * 0.05}
+              Yoffset={-this.state.offset * 0.1}
+              Xoffset={-this.state.offset * 0.2}
+              rotate={this.state.offset * 0.01}
             />
             <Sticker
               image={wow_sticker}
@@ -269,7 +287,7 @@ class IndexPage extends Component {
               positionUnits={{ left: "%" }}
               checkIfCanAnimate={() => this.checkIfCanAnimate("section-4")}
               Yoffset={-this.state.offset * 0.1}
-              Xoffset={-this.state.offset * 1.3}
+              Xoffset={-this.state.offset * 0.1}
             />
             <ThirdText />
           </Section>
@@ -286,7 +304,7 @@ class IndexPage extends Component {
               size={320}
               checkIfCanAnimate={() => this.checkIfCanAnimate("section-5")}
               Yoffset={-this.state.offset * 0.1}
-              Xoffset={this.state.offset * 0.2}
+              Xoffset={this.state.offset * 0.1}
             />
           </Section>
           <Section
@@ -333,8 +351,8 @@ class IndexPage extends Component {
               positionUnits={{ left: "%" }}
               size={300}
               checkIfCanAnimate={() => this.checkIfCanAnimate("section-5")}
-              Yoffset={this.state.offset * 0.2}
-              Xoffset={this.state.offset * 0.4}
+              Yoffset={this.state.offset * 0.1}
+              Xoffset={this.state.offset * 0.2}
             />
           </Section>
         </Layout>
